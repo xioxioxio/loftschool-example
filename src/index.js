@@ -19,7 +19,8 @@ function addListener(eventName, target, fn) {
  Функция должна удалять у элемента target обработчик fn события eventName
 
  Пример:
-   removeListener('click', document.querySelector('a'), someHandler) // должна удалить указанный обработчик кликов на указанный элемент
+   removeListener('click', document.querySelector('a'), someHandler) 
+   // должна удалить указанный обработчик кликов на указанный элемент
  */
 function removeListener(eventName, target, fn) {
     target.removeEventListener(eventName, fn);
@@ -80,12 +81,7 @@ function delegate(target, fn) {
    // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
  */
 function once(target, fn) {
-    let onceFunc = () => {
-        fn();
-        target.removeEventListener('click', onceFunc);
-    }
-
-    target.addEventListener('click', onceFunc);
+    target.addEventListener('click', fn, { once: true });
 }
 
 export {

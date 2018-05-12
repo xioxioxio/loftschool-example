@@ -13,6 +13,7 @@ function getRandomColor() {
 
     return color;
 }
+
 /*
  Создайте страницу с кнопкой.
  При нажатии на кнопку должен создаваться div со случайными размерами, цветом и позицией на экране
@@ -63,6 +64,29 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    target.setAttribute('draggable', 'true');
+    target.id = 'id' + (new Date()).getTime();
+
+    target.addEventListener('dragstart', (e) =>
+        e.dataTransfer.setData('dragData', e.target.id + ';'
+            + (parseInt(e.target.style.left, 10) - e.clientX) + ';'
+            + (parseInt(e.target.style.top, 10) - e.clientY)));
+            
+    document.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        
+        return false;
+    });
+    document.addEventListener('drop', (e) => {
+        let dragArray = e.dataTransfer.getData('dragData').split(';');
+        let obj = document.getElementById(dragArray[0]);
+
+        obj.style.left = (parseInt(dragArray[1], 10) + event.clientX) + 'px';
+        obj.style.top = (parseInt(dragArray[2], 10) + event.clientY) + 'px';
+        e.preventDefault();
+
+        return false;
+    }); 
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
