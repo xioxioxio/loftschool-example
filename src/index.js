@@ -49,6 +49,44 @@ const saveButton = document.getElementById('save-button');
 const vkFilter = document.getElementById('vk-filter');
 const savedFilter = document.getElementById('saved-filter');
 
+saveButton.onclick = () => {
+    let arr = [...saveList.getElementsByClassName('row')].map((item) => item.id);
+
+    localStorage.setItem('savedList', JSON.stringify(arr));
+}
+
+vkList.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('dragData', e.target.id);
+});
+
+saveList.addEventListener('dragover', (e) => {
+    e.preventDefault();
+
+    return false;
+});
+
+saveList.addEventListener('drop', (e) => {
+    let dragId = e.dataTransfer.getData('dragData');
+    let row = document.getElementById(dragId);
+    let button = row.getElementsByTagName('button')[0];
+
+    button.innerText = 'x';
+    row.setAttribute('draggable', 'false');
+    saveList.appendChild(row);
+});
+
+vkFilter.addEventListener('keyup', () => {
+    [...vkList.children].forEach((item) => {
+        filterElement(item, vkFilter.value);
+    });
+});
+
+savedFilter.addEventListener('keyup', () => {
+    [...saveList.children].forEach((item) => {
+        filterElement(item, savedFilter.value);
+    });
+});
+
 auth()
     .then(() => callAPI('friends.get', { fields: 'photo_100' }))
     .then(friends => {
@@ -68,31 +106,6 @@ auth()
                 }
             };
         });
-
-        vkList.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('dragData', e.target.id);
-        });
-
-        saveList.addEventListener('dragover', (e) => {
-            e.preventDefault();
-
-            return false;
-        });
-        saveList.addEventListener('drop', (e) => {
-            let dragId = e.dataTransfer.getData('dragData');
-            let row = document.getElementById(dragId);
-            let button = row.getElementsByTagName('button')[0];
-
-            button.innerText = 'x';
-            row.setAttribute('draggable', 'false');
-            saveList.appendChild(row);
-        });
-
-        saveButton.onclick = () => {
-            let arr = [...saveList.getElementsByClassName('row')].map((item) => item.id);
-
-            localStorage.setItem('savedList', JSON.stringify(arr));
-        }
     })
     .then(() => {
         let savedItems = JSON.parse(localStorage.getItem('savedList'));
@@ -105,15 +118,3 @@ auth()
             saveList.appendChild(row);
         });
     });
-
-vkFilter.addEventListener('keyup', () => {
-    [...vkList.children].forEach((item) => {
-        filterElement(item, vkFilter.value);
-    });
-});
-
-savedFilter.addEventListener('keyup', () => {
-    [...saveList.children].forEach((item) => {
-        filterElement(item, savedFilter.value);
-    });
-});
