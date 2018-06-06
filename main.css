@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10pt;
+    background-color: orange;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    margin: auto;
+    width: 50%;
+    height: 400px;
+}
+
+.padding {
+    padding: 10pt;
+}
+
+.title {
+    font-size: 15pt;
+    font-weight: bold;
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+#vk-list {
+    width: 50%;
+    flex-direction: column;
+    padding: 5pt;
+}
+
+#selected-list {
+    /* display: flex; */
+    width: 50%;
+    flex-direction: column;
+    padding: 5pt
+}
+
+.inner-scroll {
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0px;
+}
+
+.v-line {
+    border-left: 2pt solid whitesmoke;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.row-button {
+    float: right;
+    border: 0;
+    color: gainsboro;
+    font-size: 15pt;
+    background-color: transparent;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+#save-button {
+    float: right;
+    border: 0;
+    padding: 5pt;
+    color: white;
+    font-weight: bold;
+    border-radius: 3pt;
+    background: orange;
+}
+#save-button:hover {
+    background: green;
+}
+#save-button:active {
+    background: greenyellow;
+}
+
+.footer {
+    background-color: gainsboro;
+    border-bottom-left-radius: 10pt;
+    border-bottom-right-radius: 10pt;
+}
+.row {
+    padding: 5pt;
+    display: flex;
+    flex-direction: row;
+    align-items: center;  
+    border-bottom: 1px dashed gainsboro;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: white;
+}
+.vk-img {
+    border-radius: 50%;
+    height: auto;
+    width: auto;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.filter {
+    background-color: gainsboro;
+    flex-direction: row;
+}
+
+.filter-input {
+    width: 46%;
+    padding: 3pt;
+    margin: 5pt;
+    border-radius: 3pt;
+    border: 0;
+}
